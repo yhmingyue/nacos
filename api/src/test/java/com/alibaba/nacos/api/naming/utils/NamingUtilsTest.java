@@ -100,19 +100,18 @@ public class NamingUtilsTest {
         } catch (Exception e) {
             assertTrue(NacosException.class.equals(e.getClass()));
             assertEquals(
-                    "Instance 'clusterName' should be characters with only 0-9a-zA-Z-. (current: cluster1,cluster2)",
-                    e.getMessage());
+                    "Instance 'clusterName' should be characters with only 0-9a-zA-Z-. (current: cluster1,cluster2)", e.getMessage());
         }
         instanceList.remove(instance);
-        
+
         // TODO valid clusterName
         instance.setClusterName("cluster1");
         instanceList.add(instance);
         NamingUtils.batchCheckInstanceIsLegal(instanceList);
         assertTrue(true);
-        
+
         instanceList.remove(instance);
-        
+
         // check heartBeatTimeout, heartBeatInterval, ipDeleteTimeout
         Map<String, String> meta = new HashMap<>();
         meta.put(PreservedMetadataKeys.HEART_BEAT_TIMEOUT, "1");
@@ -130,7 +129,7 @@ public class NamingUtilsTest {
                     e.getMessage());
         }
         instanceList.remove(instance);
-        
+
         meta.put(PreservedMetadataKeys.HEART_BEAT_TIMEOUT, "3");
         meta.put(PreservedMetadataKeys.HEART_BEAT_INTERVAL, "2");
         meta.put(PreservedMetadataKeys.IP_DELETE_TIMEOUT, "3");
